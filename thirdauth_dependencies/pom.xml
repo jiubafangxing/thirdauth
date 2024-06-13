@@ -1,0 +1,59 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>thirdauth_dependencies</artifactId>
+    <name>thirdauth_dependencies</name>
+    <packaging>pom</packaging>
+    <description>thirdauth Dependencies</description>
+    <groupId>www.thirdauth.com</groupId>
+    <version>${revision}</version>
+
+    <properties>
+        <!-- 统一定义依赖版本号 -->
+        <revision>1.0-SNAPSHOT</revision>
+        <commons.codec.version>1.16.1</commons.codec.version>
+        <json.version>20231013</json.version>
+        <slf4j.version>2.0.13</slf4j.version>
+        <jackson.version>2.17.1</jackson.version>
+        <lombok.version>1.18.30</lombok.version>
+        <openfeign.starer.version>3.1.4</openfeign.starer.version>
+    </properties>
+    <dependencyManagement>
+        <dependencies>
+
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>${commons.codec.version}</version>
+        </dependency>
+            <!-- https://mvnrepository.com/artifact/org.json/json -->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>${json.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <version>${openfeign.starer.version}</version>
+        </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+</project>
