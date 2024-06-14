@@ -12,8 +12,6 @@ public class PermanentCodeAccessor {
 
     WorkWeixinActiveParamAccessor workWeixinActiveParamAccessor;
 
-<<<<<<< Updated upstream
-=======
     public WorkWeixinFeignClient getWorkWeixinFeignClient() {
         return workWeixinFeignClient;
     }
@@ -38,7 +36,6 @@ public class PermanentCodeAccessor {
         this.workWeixinActiveParamAccessor = workWeixinActiveParamAccessor;
     }
 
->>>>>>> Stashed changes
     public void permanentCode(String authCode){
         WorkWiexinPermanentCodeReq workWiexinPermanentCodeReq = new WorkWiexinPermanentCodeReq();
         workWiexinPermanentCodeReq.setAuthcode(authCode);

@@ -38,8 +38,6 @@ public class WorkWeixinCorpInfo implements CorpInfo {
 
     @JsonProperty("state")
     private String state;
-<<<<<<< Updated upstream
-=======
 
     @Override
     public String getCorpId() {
@@ -50,5 +48,4 @@ public class WorkWeixinCorpInfo implements CorpInfo {
     public String getThirdPartyCode() {
         return "workweixin";
     }
->>>>>>> Stashed changes
 }
