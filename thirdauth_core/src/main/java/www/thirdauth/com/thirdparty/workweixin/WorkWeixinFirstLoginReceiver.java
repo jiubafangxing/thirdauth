@@ -17,11 +17,27 @@ import www.thirdauth.com.thirdparty.workweixin.user.WorkWeixinUserResponse;
 public abstract   class WorkWeixinFirstLoginReceiver extends FirstLoginReceiver {
 
 
+<<<<<<< Updated upstream
     private WorkWeixinFeignClient workWeixinFeignClient;
 
     private WorkWeixinActiveParamAccessor activeParamAccessor;
 
 
+=======
+    protected  WorkWeixinFeignClient workWeixinFeignClient;
+
+    protected  WorkWeixinActiveParamAccessor activeParamAccessor;
+
+
+    public void setWorkWeixinFeignClient(WorkWeixinFeignClient workWeixinFeignClient) {
+        this.workWeixinFeignClient = workWeixinFeignClient;
+    }
+
+    public void setActiveParamAccessor(WorkWeixinActiveParamAccessor activeParamAccessor) {
+        this.activeParamAccessor = activeParamAccessor;
+    }
+
+>>>>>>> Stashed changes
     @Override
     protected ThirdUserIdInfo reqUserInfo(LoginMsg loginMsg) {
         WorkWeixinCallbackLoginMsg workWeixinCallbackLoginMsg = (WorkWeixinCallbackLoginMsg) loginMsg;

@@ -14,9 +14,11 @@
         <commons.codec.version>1.16.1</commons.codec.version>
         <json.version>20231013</json.version>
         <slf4j.version>2.0.13</slf4j.version>
-        <jackson.version>2.17.1</jackson.version>
+        <jackson.version>2.13.3</jackson.version>
         <lombok.version>1.18.30</lombok.version>
         <openfeign.starer.version>3.1.4</openfeign.starer.version>
+        <springboot3.version>3.2.5</springboot3.version>
+        <feign-jackson.version>12.4</feign-jackson.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -39,9 +41,21 @@
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
             <version>${jackson.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+
         <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -53,6 +67,23 @@
             <artifactId>spring-cloud-starter-openfeign</artifactId>
             <version>${openfeign.starer.version}</version>
         </dependency>
+            <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter</artifactId>
+                <version>${springboot3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-configuration-processor</artifactId>
+                <version>${springboot3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>www.thirdauth.com</groupId>
+                <artifactId>thirdauth_bom</artifactId>
+                <scope>import</scope>
+                <version>${revision}</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>

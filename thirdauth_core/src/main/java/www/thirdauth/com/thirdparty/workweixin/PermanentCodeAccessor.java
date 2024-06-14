@@ -12,6 +12,33 @@ public class PermanentCodeAccessor {
 
     WorkWeixinActiveParamAccessor workWeixinActiveParamAccessor;
 
+<<<<<<< Updated upstream
+=======
+    public WorkWeixinFeignClient getWorkWeixinFeignClient() {
+        return workWeixinFeignClient;
+    }
+
+    public void setWorkWeixinFeignClient(WorkWeixinFeignClient workWeixinFeignClient) {
+        this.workWeixinFeignClient = workWeixinFeignClient;
+    }
+
+    public CorpRepository getCorpRepository() {
+        return corpRepository;
+    }
+
+    public void setCorpRepository(CorpRepository corpRepository) {
+        this.corpRepository = corpRepository;
+    }
+
+    public WorkWeixinActiveParamAccessor getWorkWeixinActiveParamAccessor() {
+        return workWeixinActiveParamAccessor;
+    }
+
+    public void setWorkWeixinActiveParamAccessor(WorkWeixinActiveParamAccessor workWeixinActiveParamAccessor) {
+        this.workWeixinActiveParamAccessor = workWeixinActiveParamAccessor;
+    }
+
+>>>>>>> Stashed changes
     public void permanentCode(String authCode){
         WorkWiexinPermanentCodeReq workWiexinPermanentCodeReq = new WorkWiexinPermanentCodeReq();
         workWiexinPermanentCodeReq.setAuthcode(authCode);

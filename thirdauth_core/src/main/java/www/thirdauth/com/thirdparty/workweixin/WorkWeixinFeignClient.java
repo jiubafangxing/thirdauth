@@ -14,7 +14,11 @@ import www.thirdauth.com.thirdparty.workweixin.req.WorkWeixinSuiteTokenReq;
 import www.thirdauth.com.thirdparty.workweixin.req.WorkWiexinPermanentCodeReq;
 import www.thirdauth.com.thirdparty.workweixin.user.WorkWeixinUserResponse;
 
+<<<<<<< Updated upstream
 @FeignClient(value = "workWeixinFeignClient", url = "https://qyapi.weixin.qq.com")
+=======
+//@FeignClient(value = "workWeixinFeignClient", url = "https://qyapi.weixin.qq.com")
+>>>>>>> Stashed changes
 public interface WorkWeixinFeignClient {
 
     @PostMapping("/cgi-bin/service/auth/getuserinfo3rd")

@@ -38,4 +38,17 @@ public class WorkWeixinCorpInfo implements CorpInfo {
 
     @JsonProperty("state")
     private String state;
+<<<<<<< Updated upstream
+=======
+
+    @Override
+    public String getCorpId() {
+        return authCorpInfo.getCorpid();
+    }
+
+    @Override
+    public String getThirdPartyCode() {
+        return "workweixin";
+    }
+>>>>>>> Stashed changes
 }

@@ -1,5 +1,9 @@
 package www.thirdauth.com.thirdparty.workweixin;
 
+<<<<<<< Updated upstream
+=======
+import lombok.Data;
+>>>>>>> Stashed changes
 import lombok.extern.slf4j.Slf4j;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -9,7 +13,10 @@ import org.xml.sax.SAXException;
 import www.thirdauth.com.thirdparty.CacheAble;
 import www.thirdauth.com.thirdparty.workweixin.aes.xml.AesException;
 import www.thirdauth.com.thirdparty.workweixin.aes.xml.WXBizMsgCrypt;
+<<<<<<< Updated upstream
 import www.thirdauth.com.thirdparty.workweixin.init.WorkWeixinProperties;
+=======
+>>>>>>> Stashed changes
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -22,10 +29,17 @@ import java.util.concurrent.*;
  * 用来接受企业微信的推送消息
  */
 @Slf4j
+<<<<<<< Updated upstream
 public class WorkWeixinPushContainer {
     CacheAble<String,String> cacheAble;
 
     WorkWeixinProperties workWeixinProperties;
+=======
+@Data
+public class WorkWeixinPushContainer {
+    CacheAble<String,String> cacheAble;
+
+>>>>>>> Stashed changes
 
     WXBizMsgCrypt wxBizMsgCrypt;
 
@@ -34,10 +48,23 @@ public class WorkWeixinPushContainer {
 
     PermanentCodeAccessor permanentCodeAccessor;
 
+<<<<<<< Updated upstream
 
     public WorkWeixinPushContainer(WorkWeixinProperties workWeixinProperties) throws AesException {
         this.workWeixinProperties = workWeixinProperties;
         wxBizMsgCrypt = new WXBizMsgCrypt(workWeixinProperties.getToken(), workWeixinProperties.getEncodingAESKey(), workWeixinProperties.getSuiteId());
+=======
+    String suiteId;
+
+    String encodingAESKey;
+
+    String token;
+
+
+
+    public WorkWeixinPushContainer() throws AesException {
+        wxBizMsgCrypt = new WXBizMsgCrypt(token,encodingAESKey,suiteId);
+>>>>>>> Stashed changes
         // 获取可用处理器数量
         int numOfProcessors = Runtime.getRuntime().availableProcessors();
 

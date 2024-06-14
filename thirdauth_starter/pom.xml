@@ -7,11 +7,10 @@
     <relativePath>../pom.xml</relativePath>
   </parent>
   <modules>
-    <module>thirdauth-spring-boot-autoconfig</module>
+    <module>thirdauth-spring-boot-starter</module>
   </modules>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>thirdauth_starter</artifactId>
   <name>thirdauth_starter</name>
   <packaging>pom</packaging>
-
 </project>
