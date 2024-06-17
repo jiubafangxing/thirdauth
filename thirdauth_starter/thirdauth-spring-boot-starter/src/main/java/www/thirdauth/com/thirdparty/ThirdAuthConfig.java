@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.cloud.openfeign.support.SpringMvcContract;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import www.thirdauth.com.thirdparty.workweixin.*;
@@ -24,6 +25,7 @@ public class ThirdAuthConfig {
                 .decoder(new ThirdAuthJacksonDecoder())
                 .logger(new Slf4jLogger(WorkWeixinFeignClient.class))
                 .logLevel(feign.Logger.Level.FULL)
+                .contract(new SpringMvcContract())
                 .target( WorkWeixinFeignClient.class,"https://qyapi.weixin.qq.com");
     }
 
@@ -57,7 +59,7 @@ public class ThirdAuthConfig {
 
 
     @ConditionalOnMissingBean(value = WorkWeixinPushContainer.class)
-    @ConditionalOnBean(value ={CorpRepository.class})
+    @ConditionalOnBean(value ={CorpRepository.class, WorkWeixinProperties.class})
     @Bean
     public WorkWeixinPushContainer workWeixinPushContainer(@Autowired CacheAble<String,String> cacheAble,
                                                            @Autowired WorkWeixinProperties workWeixinProperties,
