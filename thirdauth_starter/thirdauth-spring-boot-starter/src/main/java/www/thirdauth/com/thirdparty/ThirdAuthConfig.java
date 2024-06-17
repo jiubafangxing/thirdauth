@@ -17,7 +17,8 @@ import java.util.jar.JarEntry;
 @Configuration
 @EnableConfigurationProperties(value =  WorkWeixinProperties.class)
 public class ThirdAuthConfig {
-
+    @Autowired
+    WorkWeixinProperties workWeixinProperties;
     @Bean
     public WorkWeixinFeignClient workWeixinFeignClient() {
         return Feign.builder()
@@ -33,8 +34,8 @@ public class ThirdAuthConfig {
     @ConditionalOnBean(value ={CacheAble.class,CorpRepository.class})
     @Bean
     public WorkWeixinActiveParamAccessor workWeixinActiveParamAccessor(@Autowired CacheAble<String,String> cacheAble,
-                                                                       @Autowired CorpRepository corpRepository,
-                                                                       @Autowired WorkWeixinProperties workWeixinProperties){
+                                                                       @Autowired CorpRepository corpRepository
+                                                                     ){
         WorkWeixinActiveParamAccessor  workWeixinActiveParamAccessor = new WorkWeixinActiveParamAccessor(workWeixinFeignClient(),
                 cacheAble,
                 corpRepository,
@@ -59,16 +60,15 @@ public class ThirdAuthConfig {
 
 
     @ConditionalOnMissingBean(value = WorkWeixinPushContainer.class)
-    @ConditionalOnBean(value ={CorpRepository.class, WorkWeixinProperties.class})
+    @ConditionalOnBean(value ={CorpRepository.class })
     @Bean
     public WorkWeixinPushContainer workWeixinPushContainer(@Autowired CacheAble<String,String> cacheAble,
-                                                           @Autowired WorkWeixinProperties workWeixinProperties,
                                                            @Autowired PermanentCodeAccessor permanentCodeAccessor) throws AesException {
-        WorkWeixinPushContainer workWeixinPushContainer = new WorkWeixinPushContainer();
+        WorkWeixinPushContainer workWeixinPushContainer = new WorkWeixinPushContainer(workWeixinProperties.getSuiteId(), workWeixinProperties.getEncodingAESKey(),workWeixinProperties.getToken());
         workWeixinPushContainer.setCacheAble(cacheAble);
-        workWeixinPushContainer.setToken(workWeixinProperties.getToken());
-        workWeixinPushContainer.setSuiteId(workWeixinProperties.getSuiteId());
-        workWeixinPushContainer.setEncodingAESKey(workWeixinProperties.getEncodingAESKey());
+//        workWeixinPushContainer.setToken(workWeixinProperties.getToken());
+//        workWeixinPushContainer.setSuiteId(workWeixinProperties.getSuiteId());
+//        workWeixinPushContainer.setEncodingAESKey(workWeixinProperties.getEncodingAESKey());
         workWeixinPushContainer.setPermanentCodeAccessor(permanentCodeAccessor);
         return workWeixinPushContainer;
     }
