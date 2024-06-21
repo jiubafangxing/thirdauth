@@ -64,7 +64,7 @@ public class ThirdAuthConfig {
     @Bean
     public WorkWeixinPushContainer workWeixinPushContainer(@Autowired CacheAble<String,String> cacheAble,
                                                            @Autowired PermanentCodeAccessor permanentCodeAccessor) throws AesException {
-        WorkWeixinPushContainer workWeixinPushContainer = new WorkWeixinPushContainer(workWeixinProperties.getSuiteId(), workWeixinProperties.getEncodingAESKey(),workWeixinProperties.getToken());
+        WorkWeixinPushContainer workWeixinPushContainer = new WorkWeixinPushContainer(workWeixinProperties.getSuiteId(),workWeixinProperties.getCorpId(), workWeixinProperties.getEncodingAESKey(),workWeixinProperties.getToken());
         workWeixinPushContainer.setCacheAble(cacheAble);
 //        workWeixinPushContainer.setToken(workWeixinProperties.getToken());
 //        workWeixinPushContainer.setSuiteId(workWeixinProperties.getSuiteId());

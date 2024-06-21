@@ -1,5 +1,6 @@
 package www.thirdauth.com.thirdparty.workweixin.resp.permanentcode;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import www.thirdauth.com.thirdparty.mark.CorpInfo;
@@ -39,13 +40,16 @@ public class WorkWeixinCorpInfo implements CorpInfo {
     @JsonProperty("state")
     private String state;
 
+    private String thirdPartyCode = "workweixin";
+
     @Override
+    @JsonIgnore
     public String getCorpId() {
-        return authCorpInfo.getCorpid();
+        return null != authCorpInfo ?authCorpInfo.getCorpid():"";
     }
 
     @Override
     public String getThirdPartyCode() {
-        return "workweixin";
+        return thirdPartyCode;
     }
 }

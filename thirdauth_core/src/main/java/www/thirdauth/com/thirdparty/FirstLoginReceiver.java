@@ -11,7 +11,7 @@ public  abstract  class FirstLoginReceiver {
 
 
 
-    public void receiveMsg(LoginMsg loginMsg){
+    public ThirdUserIdInfo receiveMsg(LoginMsg loginMsg){
         ThirdUserIdInfo thirdUserIdInfo = reqUserInfo(loginMsg);
         if(null != thirdUserIdInfo) {
             Integer exist = queryExist(thirdUserIdInfo);
@@ -20,6 +20,7 @@ public  abstract  class FirstLoginReceiver {
                 saveThird(thirdUserIdInfo);
             }
         }
+        return thirdUserIdInfo;
     }
 
     private  void saveThird(ThirdUserIdInfo thirdUserIdInfo){

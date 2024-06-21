@@ -37,6 +37,10 @@ public abstract   class WorkWeixinFirstLoginReceiver extends FirstLoginReceiver 
         WorkWeixinCallbackLoginMsg workWeixinCallbackLoginMsg = (WorkWeixinCallbackLoginMsg) loginMsg;
         String suiteAccessToken =   activeParamAccessor.getSuiteToken();
         WorkWeixinUserInfoResp workWeixinUserInfoResp = workWeixinFeignClient.getuserinfo3rd(suiteAccessToken, workWeixinCallbackLoginMsg.getCode());
+        if(workWeixinUserInfoResp.getErrCode() != 0){
+            log.error("getuserinfo3rd fail: {}",workWeixinUserInfoResp.getErrMsg());
+            return null;
+        }
         return workWeixinUserInfoResp;
     }
 
@@ -52,6 +56,7 @@ public abstract   class WorkWeixinFirstLoginReceiver extends FirstLoginReceiver 
         WorkWeixinUserDetail workWeixinUserDetail = new WorkWeixinUserDetail();
         workWeixinUserDetail.setUserId(workWeixinUserInfoResp.getUserId());
         workWeixinUserDetail.setOpenUserId(workWeixinUserInfoResp.getOpenUserId());
+        workWeixinUserDetail.setCorpId(((WorkWeixinUserInfoResp) thirdUserIdInfo).getCorpId());
         if(null == accessToken || accessToken.equals("")){
             return workWeixinUserDetail;
         }else{

@@ -21,6 +21,7 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Base64;
 import www.thirdauth.com.thirdparty.workweixin.aes.ByteGroup;
 
@@ -39,6 +40,7 @@ import www.thirdauth.com.thirdparty.workweixin.aes.ByteGroup;
  * 	<li>如果安装了JDK，将两个jar文件放到%JDK_HOME%\jre\lib\security目录下覆盖原来文件</li>
  * </ol>
  */
+@Slf4j
 public class WXBizMsgCrypt {
 	static Charset CHARSET = Charset.forName("utf-8");
 	Base64 base64 = new Base64();
@@ -103,7 +105,7 @@ public class WXBizMsgCrypt {
 	 * @return 加密后base64编码的字符串
 	 * @throws AesException aes加密失败
 	 */
-	String encrypt(String randomStr, String text) throws AesException {
+	public String encrypt(String randomStr, String text) throws AesException {
 		ByteGroup byteCollector = new ByteGroup();
 		byte[] randomStrBytes = randomStr.getBytes(CHARSET);
 		byte[] textBytes = text.getBytes(CHARSET);
@@ -150,25 +152,23 @@ public class WXBizMsgCrypt {
 	 * @return 解密得到的明文
 	 * @throws AesException aes解密失败
 	 */
-	String decrypt(String text) throws AesException {
+	public String decrypt(String text) throws AesException {
 		byte[] original;
+		byte[] encrypted;
 		try {
 			// 设置解密模式为AES的CBC模式
 			Cipher cipher = Cipher.getInstance("AES/CBC/NoPadding");
 			SecretKeySpec key_spec = new SecretKeySpec(aesKey, "AES");
 			IvParameterSpec iv = new IvParameterSpec(Arrays.copyOfRange(aesKey, 0, 16));
 			cipher.init(Cipher.DECRYPT_MODE, key_spec, iv);
-
 			// 使用BASE64对密文进行解码
-			byte[] encrypted = Base64.decodeBase64(text);
-
+			encrypted = Base64.decodeBase64(text);
 			// 解密
 			original = cipher.doFinal(encrypted);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new AesException(AesException.DecryptAESError);
 		}
-
 		String xmlContent, from_receiveid;
 		try {
 			// 去除补位字符
@@ -186,7 +186,7 @@ public class WXBizMsgCrypt {
 			e.printStackTrace();
 			throw new AesException(AesException.IllegalBuffer);
 		}
-
+		log.info("[parse]from_receiveid{} xml content {}", from_receiveid, xmlContent);
 		// receiveid不相同的情况
 		if (!from_receiveid.equals(receiveid)) {
 			throw new AesException(AesException.ValidateCorpidError);

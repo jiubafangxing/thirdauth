@@ -48,12 +48,12 @@ public class WorkWeixinActiveParamAccessor  {
         if(null == suiteToken || suiteToken.equals("")) {
             String suiteTicket = getSuiteticket();
             WorkWeixinSuiteTokenReq workWeixinSuiteTokenReq = new WorkWeixinSuiteTokenReq();
-            workWeixinSuiteTokenReq.setSuiteSecret(suiteId);
-            workWeixinSuiteTokenReq.setSuiteId(suiteSecret);
+            workWeixinSuiteTokenReq.setSuiteSecret(suiteSecret);
+            workWeixinSuiteTokenReq.setSuiteId(suiteId);
             workWeixinSuiteTokenReq.setSuiteTicket(suiteTicket);
             WorkWiexinSuiteTokenResp suiteTokenResp = workWeixinFeignClient.getSuiteToken(workWeixinSuiteTokenReq);
             if (null != suiteTokenResp && null != suiteTokenResp.getSuiteAccessToken()) {
-                cacheAble.put("workWexin:suiteToken", suiteTokenResp.getSuiteAccessToken(), 2 * 60 * 60);
+                cacheAble.put("workWexin:suiteToken", suiteTokenResp.getSuiteAccessToken(), 2 * 60 * 60* 1000);
                 return suiteTokenResp.getSuiteAccessToken();
             } else {
                 throw new RuntimeException("no SuiteAccessToken");
@@ -64,8 +64,8 @@ public class WorkWeixinActiveParamAccessor  {
     }
 
     public String getAccessToken(String corpId) {
-        String suiteToken = cacheAble.get("workWexin:accessToken:corpId:"+corpId);
-        if(null == suiteToken|| suiteToken.equals("") ){
+        String accessToken = cacheAble.get("workWexin:accessToken:corpId:"+corpId);
+        if(null == accessToken|| accessToken.equals("") ){
             CorpInfo corpInfo = corpRepository.queryCorpInfo(corpId,"workweixin");
             if(null == corpInfo){
                 return null;
@@ -78,7 +78,7 @@ public class WorkWeixinActiveParamAccessor  {
                 WorkWeixinCorpTokenReq corpTokenReq = new WorkWeixinCorpTokenReq();
                 corpTokenReq.setPermanentCode(permanentCode);
                 corpTokenReq.setAuthCorpid(corpId);
-                WorkWeixinAccessTokenResponse corpToken = workWeixinFeignClient.getCorpToken(suiteToken, corpTokenReq);
+                WorkWeixinAccessTokenResponse corpToken = workWeixinFeignClient.getCorpToken(getSuiteToken(), corpTokenReq);
                 if(null != corpToken.getErrmsg()){
                     return null;
                 }else{
@@ -87,7 +87,7 @@ public class WorkWeixinActiveParamAccessor  {
                 }
             }
         }
-        return null;
+        return accessToken;
     }
 
     public String getSuiteticket(){
