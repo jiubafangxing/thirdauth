@@ -63,8 +63,14 @@ public class ThirdAuthConfig {
     @ConditionalOnBean(value ={CorpRepository.class })
     @Bean
     public WorkWeixinPushContainer workWeixinPushContainer(@Autowired CacheAble<String,String> cacheAble,
-                                                           @Autowired PermanentCodeAccessor permanentCodeAccessor) throws AesException {
-        WorkWeixinPushContainer workWeixinPushContainer = new WorkWeixinPushContainer(workWeixinProperties.getSuiteId(),workWeixinProperties.getCorpId(), workWeixinProperties.getEncodingAESKey(),workWeixinProperties.getToken());
+                                                           @Autowired PermanentCodeAccessor permanentCodeAccessor,
+                                                           @Autowired CorpRepository corpRepository
+    ) throws AesException {
+        WorkWeixinPushContainer workWeixinPushContainer = new WorkWeixinPushContainer(workWeixinProperties.getSuiteId(),
+                workWeixinProperties.getCorpId(),
+                workWeixinProperties.getEncodingAESKey(),
+                workWeixinProperties.getToken(),
+                corpRepository);
         workWeixinPushContainer.setCacheAble(cacheAble);
 //        workWeixinPushContainer.setToken(workWeixinProperties.getToken());
 //        workWeixinPushContainer.setSuiteId(workWeixinProperties.getSuiteId());
